@@ -44,7 +44,7 @@ python scraper_shell.py
 
 ```
 web_scraper/
-├── scraper_cli.py        # Main CLI interface
+├── scraper_shell.py      # Main CLI interface
 ├── scraper_core.py       # Core scraping functions
 ├── requirements.txt      # Dependencies
 ├── .gitignore            # Git ignore file
