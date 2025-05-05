@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project.scripts]
+web-scraper = "web_scraper_cli.shell.scraper_shell:execute"
+
+[project]
+name = "web-scraper-cli"
+version = "0.1.0"
+description = "A command-line tool for scraping web pages."
+
+readme = "README.md"
+license = { text = "MIT" }
+dependencies = [
+    "requests",
+    "beautifulsoup4",
+    "lxml"
+]

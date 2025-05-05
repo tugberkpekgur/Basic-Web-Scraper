@@ -1,6 +1,6 @@
 import cmd
 import argparse
-from scraper_core import *
+from web_scraper_cli.core import scraper_core as sc
 import os
 
 class ScraperShell(cmd.Cmd):
@@ -46,11 +46,11 @@ class ScraperShell(cmd.Cmd):
             print("Please provide a URL.")
             return
         if is_all_tag:
-            content = fetch_url_all_content(url)
+            content = sc.fetch_url_all_content(url)
         elif class_tag:
-            content = fetch_url_content_by_class(url, class_tag, args)
+            content = sc.fetch_url_content_by_class(url, class_tag, args)
         else:
-            content = fetch_url_content(url,args)
+            content = sc.fetch_url_content(url,args)
         if content:
             print(content)
         else:
@@ -84,9 +84,18 @@ class ScraperShell(cmd.Cmd):
         else:
             print(f"Unknown command: {line}. Type help for a list of commands.")
     
-if __name__ == '__main__':
+
+def execute():
+    """
+    Execute the scraper shell.
+    """
     parser = argparse.ArgumentParser(description='Web Scraper CLI')
     #parser.add_argument('url', nargs='?', help='URL to fetch')
-    
-    args = parser.parse_args()
     ScraperShell().cmdloop()
+    #args = parser.parse_args()
+
+
+if __name__ == '__main__':
+    execute()
+
+

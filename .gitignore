@@ -12,6 +12,8 @@ env/
 
 __pycache__/
 *.py[cod]
+*.pyc
+*.pyo
 *$py.class
 .idea/
 .vscode/
