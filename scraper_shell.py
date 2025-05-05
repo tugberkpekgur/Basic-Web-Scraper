@@ -12,6 +12,7 @@ class ScraperShell(cmd.Cmd):
         args = arg.split()
         url = None
         is_all_tag = False
+        class_tag = None
 
         if '-url' in args:
             try:
@@ -30,13 +31,24 @@ class ScraperShell(cmd.Cmd):
             except IndexError:
                 print("Tags not provided. Use -all <tags> to specify tags.")
                 return
-
+        elif '-class' in args:
+            try:
+                class_index = args.index('-class')
+                class_tag = args[class_index + 1]
+            except IndexError:
+                print("Tags not provided. Use -class <tags> to specify tags.")
+                return
+        if class_tag and is_all_tag:
+            print("Please provide either -all or -class, not both.")
+            return
         
         if not url:
             print("Please provide a URL.")
             return
         if is_all_tag:
             content = fetch_url_all_content(url)
+        elif class_tag:
+            content = fetch_url_content_by_class(url, class_tag, args)
         else:
             content = fetch_url_content(url,args)
         if content:
@@ -57,8 +69,10 @@ class ScraperShell(cmd.Cmd):
         """Display help information."""
         print("Available commands:")
         print("  scrape -url <url>        Fetch the content of a URL.")
-        print("          -<tags>          Fetch li tags from the URL.")
+        print("          -<tags>          Fetch tags from the URL.")
         print("          -all             Fetch all tags from the URL.")
+        print("          -script          Fetch scripts from the URL.")
+        print("          -class <class>   Fetch tags with a specific class from the URL.")
         print("  exit                     Exit the scraper shell.")
         print("  help                     Display this help message.")
         print("  clear                    Clear the screen.")
